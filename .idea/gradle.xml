@@ -11,6 +11,20 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/design-system" />
+            <option value="$PROJECT_DIR$/feature-auth" />
+            <option value="$PROJECT_DIR$/feature-auth/api" />
+            <option value="$PROJECT_DIR$/feature-auth/impl" />
+            <option value="$PROJECT_DIR$/feature-favorite" />
+            <option value="$PROJECT_DIR$/feature-favorite/api" />
+            <option value="$PROJECT_DIR$/feature-favorite/impl" />
+            <option value="$PROJECT_DIR$/feature-home" />
+            <option value="$PROJECT_DIR$/feature-home/api" />
+            <option value="$PROJECT_DIR$/feature-home/impl" />
+            <option value="$PROJECT_DIR$/feature-profile" />
+            <option value="$PROJECT_DIR$/feature-profile/api" />
+            <option value="$PROJECT_DIR$/feature-profile/impl" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -6,7 +6,7 @@ plugins {
 
 android {
   namespace = "id.aej.myflix"
-  compileSdk = 33
+  compileSdk = 34
 
   defaultConfig {
     applicationId = "id.aej.myflix"
@@ -49,6 +49,8 @@ android {
 
 dependencies {
 
+  implementation(project(":design-system"))
+  implementation(project(":feature-home:impl"))
   implementation(libs.core.ktx)
   implementation(libs.lifecycle.runtime.ktx)
   implementation(libs.activity.compose)
