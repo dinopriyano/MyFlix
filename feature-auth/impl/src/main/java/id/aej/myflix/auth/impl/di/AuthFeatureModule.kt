@@ -3,6 +3,7 @@ package id.aej.myflix.auth.impl.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import id.aej.myflix.auth.impl.AuthFeatureImpl
 import javax.inject.Singleton
@@ -16,7 +17,6 @@ import javax.inject.Singleton
 object AuthFeatureModule {
 
   @Provides
-  @Singleton
   fun provideAuthFeature() = AuthFeatureImpl()
-
+  
 }

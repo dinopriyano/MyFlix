@@ -45,16 +45,11 @@ android {
 
 dependencies {
   api(project(":feature-auth:api"))
-  implementation(project(":design-system"))
+  api(project(":design-system"))
   implementation(libs.core.ktx)
   implementation(libs.appcompat)
   implementation(libs.material)
 
-  implementation(platform(libs.compose.bom))
-  implementation(libs.ui)
-  implementation(libs.ui.graphics)
-  implementation(libs.ui.tooling.preview)
-  implementation(libs.material3)
   implementation(libs.navigation.compose)
   implementation(libs.bundles.hilt.dagger)
   kapt(libs.hilt.android.compiler)

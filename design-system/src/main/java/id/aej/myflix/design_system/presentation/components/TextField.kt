@@ -1,8 +1,10 @@
 package id.aej.myflix.design_system.presentation.components
 
+import android.graphics.drawable.Icon
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -18,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import id.aej.myflix.design_system.domain.model.InputWrapper
+import id.aej.myflix.design_system.presentation.theme.Gray
 import id.aej.myflix.design_system.presentation.theme.Gray15
 
 /**
@@ -29,7 +32,10 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
   input: InputWrapper<String>,
   keyboardOptions: KeyboardOptions,
   visualTransformation: VisualTransformation,
-  @StringRes label: Int
+  trailingIcon: @Composable () -> Unit = {},
+  @StringRes label: Int,
+  @StringRes placeholder: Int,
+  onValueChange: (String) -> Unit
 ) {
   Column (modifier = modifier) {
     // text field label
@@ -38,23 +44,34 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
       style = MaterialTheme.typography.labelSmall,
       color = MaterialTheme.colorScheme.secondary
     )
+
+    //text field
     TextField(
       modifier = Modifier
         .fillMaxWidth()
         .padding(top = 4.dp),
       value = input.value,
+      placeholder = {
+        Text(
+          text = stringResource(id = placeholder),
+          style = MaterialTheme.typography.labelMedium,
+          color = Gray
+        )
+      },
       shape = RoundedCornerShape(10.dp),
       singleLine = true,
       keyboardOptions = keyboardOptions,
+      textStyle = MaterialTheme.typography.labelMedium,
+      trailingIcon = trailingIcon,
       visualTransformation = visualTransformation,
       colors = TextFieldDefaults.textFieldColors(
         textColor = Color.White,
         placeholderColor = MaterialTheme.colorScheme.secondary,
-        containerColor = Gray15
+        containerColor = Gray15,
+        focusedIndicatorColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent
       ),
-      onValueChange = {
-
-      }
+      onValueChange = onValueChange
     )
   }
 }

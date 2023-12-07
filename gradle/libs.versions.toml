@@ -14,6 +14,7 @@ navigation = "10.0.0"
 navigation-compose = "2.7.5"
 dagger = "2.45"
 hilt-compose = "1.0.0"
+compose-animation = "1.4.3"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -39,6 +40,12 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
 hilt-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-compose" }
+
+# Icon extended
+icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+
+# Compose animation
+compose-animation = { module = "androidx.compose.animation:animation", version.ref = "compose-animation"}
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }

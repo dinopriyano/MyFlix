@@ -1,3 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="email_address_txt">Email address</string>
+    <string name="email_address_placeholder">you@example.com</string>
+    <string name="password_txt">Password</string>
+    <string name="password_placeholder">Your password</string>
+    <string name="forgot_password_txt">Forgot password?</string>
+    <string name="sign_in_txt">Sign In</string>
+    <string name="sign_up_txt">Sign Up</string>
+    <string name="or_txt">or</string>
+    <string name="dont_have_an_account_txt">Don\'t have an account?</string>
 </resources>
