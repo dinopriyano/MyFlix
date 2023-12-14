@@ -5,15 +5,22 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.pager.PagerState
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import kotlin.math.absoluteValue
 
@@ -40,6 +47,20 @@ fun Modifier.animatedScale() = composed {
           }
         }
       }
+  }
+}
+
+@Composable fun Modifier.drawCircleIndicator(
+  xOffset: Float,
+  indicatorSize: Dp = 56.dp,
+  indicatorColor: Color = Color.White
+): Modifier = composed {
+  drawBehind {
+    drawCircle(
+      color = indicatorColor,
+      center = Offset(xOffset, indicatorSize.toPx() / 2),
+      radius = indicatorSize.toPx() / 2
+    )
   }
 }
 
