@@ -7,6 +7,7 @@ import id.aej.myflix.auth.api.AuthFeature
 import id.aej.myflix.auth.impl.presentation.screen.login.LoginScreen
 import id.aej.myflix.auth.impl.presentation.screen.register.RegisterScreen
 import id.aej.myflix.design_system.utils.composable
+import id.aej.myflix.home.impl.presentation.HomeRoute
 
 /**
  * Created by dinopriyano on 27/11/23.
@@ -25,6 +26,9 @@ class AuthFeatureImpl: AuthFeature {
       LoginScreen(
         onToRegister = {
           navController.navigate(AuthRoute.Register.route)
+        },
+        onToHome = {
+          navController.navigate(HomeRoute.Home.route)
         }
       )
     }

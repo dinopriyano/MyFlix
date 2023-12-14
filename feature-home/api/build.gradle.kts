@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-
+  implementation(project(":design-system"))
   implementation(libs.core.ktx)
   implementation(libs.appcompat)
   implementation(libs.material)

@@ -2,6 +2,8 @@
 plugins {
   alias(libs.plugins.com.android.library)
   alias(libs.plugins.org.jetbrains.kotlin.android)
+  alias(libs.plugins.dagger.hilt.android)
+  alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -42,16 +44,16 @@ android {
 }
 
 dependencies {
-
+  api(project(":feature-home:api"))
+  api(project(":design-system"))
+  implementation(project(":core"))
   implementation(libs.core.ktx)
   implementation(libs.appcompat)
   implementation(libs.material)
 
-  implementation(platform(libs.compose.bom))
-  implementation(libs.ui)
-  implementation(libs.ui.graphics)
-  implementation(libs.ui.tooling.preview)
-  implementation(libs.material3)
+  implementation(libs.navigation.compose)
+  implementation(libs.bundles.hilt.dagger)
+  kapt(libs.hilt.android.compiler)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.ext.junit)

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello_txt">Hello</string>
+    <string name="greeting_message">Hope you have a great day!</string>
 </resources>

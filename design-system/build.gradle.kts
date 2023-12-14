@@ -54,6 +54,7 @@ dependencies {
   api(libs.material3)
   api(libs.navigation.compose)
   api(libs.icons.extended)
+  api(libs.constraint.layout)
   implementation(libs.compose.animation)
 
   testImplementation(libs.junit)

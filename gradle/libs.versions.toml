@@ -15,6 +15,7 @@ navigation-compose = "2.7.5"
 dagger = "2.45"
 hilt-compose = "1.0.0"
 compose-animation = "1.4.3"
+constraint-layout = "1.0.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -46,6 +47,9 @@ icons-extended = { module = "androidx.compose.material:material-icons-extended" 
 
 # Compose animation
 compose-animation = { module = "androidx.compose.animation:animation", version.ref = "compose-animation"}
+
+# Constraint Layout
+constraint-layout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraint-layout" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }

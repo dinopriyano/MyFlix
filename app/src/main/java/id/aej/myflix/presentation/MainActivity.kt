@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import id.aej.myflix.auth.api.AuthFeature
 import id.aej.myflix.design_system.presentation.theme.MyFlixTheme
+import id.aej.myflix.home.api.HomeFeature
 import id.aej.myflix.home.impl.presentation.screen.home.HomeScreen
 import id.aej.myflix.presentation.navigation.AppNavigation
 import javax.inject.Inject
@@ -22,22 +23,34 @@ class MainActivity : ComponentActivity() {
   @Inject
   lateinit var authFeature: AuthFeature
 
+  @Inject
+  lateinit var homeFeature: HomeFeature
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
       MyFlixTheme {
-        MyFlixApp(authFeature)
+        MyFlixApp(
+          authFeature,
+          homeFeature
+        )
       }
     }
   }
 }
 
 @Composable fun MyFlixApp(
-  authFeature: AuthFeature
+  authFeature: AuthFeature,
+  homeFeature: HomeFeature
 ) {
   val navController = rememberNavController()
 
   Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-    AppNavigation(startDestination = authFeature.authRoute, navController = navController, authFeature = authFeature)
+    AppNavigation(
+      startDestination = authFeature.authRoute,
+      navController = navController,
+      authFeature = authFeature,
+      homeFeature = homeFeature
+    )
   }
 }
