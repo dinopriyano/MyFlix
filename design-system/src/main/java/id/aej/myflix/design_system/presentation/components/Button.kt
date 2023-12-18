@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -20,7 +21,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import id.aej.myflix.design_system.R
 import id.aej.myflix.design_system.utils.animatedScale
 
 /**
@@ -35,7 +38,9 @@ import id.aej.myflix.design_system.utils.animatedScale
   onClick: () -> Unit
 ) {
   Button(
-    modifier = modifier.height(56.dp).animatedScale(),
+    modifier = modifier
+      .height(56.dp)
+      .animatedScale(),
     onClick = onClick,
     colors = ButtonDefaults.buttonColors(
       contentColor = contentColor,
@@ -51,6 +56,11 @@ import id.aej.myflix.design_system.utils.animatedScale
   }
 }
 
+@Preview @Composable fun FlixButtonPreview() {
+  FlixButton(modifier = Modifier.width(200.dp), buttonText = R.string.email_txt) {
+  }
+}
+
 @Composable fun FlixIconButton(
   modifier: Modifier,
   buttonColor: Color = MaterialTheme.colorScheme.primary,
@@ -59,7 +69,11 @@ import id.aej.myflix.design_system.utils.animatedScale
   onClick: () -> Unit
 ) {
   IconButton(
-    modifier = modifier.clip(CircleShape).background(buttonColor).size(44.dp).animatedScale(),
+    modifier = modifier
+      .clip(CircleShape)
+      .background(buttonColor)
+      .size(44.dp)
+      .animatedScale(),
     onClick = onClick,
     colors = IconButtonDefaults.iconButtonColors(
       contentColor = contentColor,

@@ -16,4 +16,14 @@ object DataDummy {
     R.drawable.banner3
   )
 
+  val categories = listOf(
+    "Trending",
+    "Comedy",
+    "Horror",
+    "Action",
+    "Romance",
+    "Sport",
+    "Thriller"
+  )
+
 }

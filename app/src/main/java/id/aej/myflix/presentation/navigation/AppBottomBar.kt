@@ -35,7 +35,9 @@ import id.aej.myflix.design_system.presentation.components.FlixBottomNavigationI
 import id.aej.myflix.design_system.presentation.theme.LightTransparent
 import id.aej.myflix.design_system.presentation.theme.SecondaryDark
 import id.aej.myflix.design_system.utils.drawCircleIndicator
+import id.aej.myflix.favorite.api.FavoriteFeature
 import id.aej.myflix.home.api.HomeFeature
+import id.aej.myflix.profile.api.ProfileFeature
 
 /**
  * Created by dinopriyano on 14/12/23.
@@ -44,14 +46,17 @@ import id.aej.myflix.home.api.HomeFeature
 @Composable fun AppBottomBar(
   modifier: Modifier,
   navController: NavController,
-  homeFeature: HomeFeature
+  homeFeature: HomeFeature,
+  favoriteFeature: FavoriteFeature,
+  profileFeature: ProfileFeature
 ) {
 
   val navBackStackEntry by navController.currentBackStackEntryAsState()
   val currentDestination = navBackStackEntry?.destination
   val destinations = listOf(
-    homeFeature.homeRoute
-    // TODO: add another screen
+    homeFeature.homeRoute,
+    favoriteFeature.favoriteRoute,
+    profileFeature.profileRoute
   )
   var xIndicatorOffset by remember {
     mutableFloatStateOf(Float.NaN)
@@ -112,7 +117,15 @@ import id.aej.myflix.home.api.HomeFeature
             }
           ,
           selected = isSelected,
-          onClick = { navController.navigate(it.route) },
+          onClick = {
+            navController.navigate(it.route) {
+              popUpTo(homeFeature.homeRoute) {
+                saveState = true
+              }
+              launchSingleTop = true
+              restoreState = true
+            }
+          },
           icon = {
             Icon(
               painter = painterResource(id = icon),

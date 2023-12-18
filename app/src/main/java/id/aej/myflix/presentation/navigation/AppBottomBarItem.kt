@@ -14,7 +14,7 @@ val TabDestinations = listOf(
     unselectedIcon = R.drawable.ic_home_outlined
   ),
   Tab(
-    route = "bookmark",
+    route = "favorite",
     selectedIcon = R.drawable.ic_bookmark_filled,
     unselectedIcon = R.drawable.ic_bookmark_outlined
   ),
