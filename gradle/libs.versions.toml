@@ -16,6 +16,8 @@ dagger = "2.45"
 hilt-compose = "1.0.0"
 compose-animation = "1.4.3"
 constraint-layout = "1.0.1"
+ktor="2.3.7"
+preferences-data-store="1.0.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -51,6 +53,20 @@ compose-animation = { module = "androidx.compose.animation:animation", version.r
 # Constraint Layout
 constraint-layout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraint-layout" }
 
+# Networking
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-engine-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
+ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-gson = { module = "io.ktor:ktor-serialization-gson", version.ref = "ktor" }
+
+# Preferences Data Store
+data-store = { module = "androidx.datastore:datastore-preferences", version.ref = "preferences-data-store" }
+data-store-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "preferences-data-store" }
+
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
@@ -60,4 +76,5 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "org-jetbrains-k
 
 [bundles]
 hilt-dagger = ["hilt-android","hilt-compose"]
-
+ktor = ["ktor-client-core","ktor-client-android","ktor-engine-okhttp","ktor-client-logging","ktor-client-negotiation","ktor-client-serialization","ktor-serialization-gson", "ktor-client-auth"]
+data-store = ["data-store","data-store-core"]

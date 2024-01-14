@@ -2,6 +2,8 @@
 plugins {
   alias(libs.plugins.com.android.library)
   alias(libs.plugins.org.jetbrains.kotlin.android)
+  alias(libs.plugins.dagger.hilt.android)
+  alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -35,6 +37,17 @@ dependencies {
   implementation(libs.core.ktx)
   implementation(libs.appcompat)
   implementation(libs.material)
+
+  // Networking
+  implementation(libs.bundles.ktor)
+
+  // Hilt Dagger
+  implementation(libs.bundles.hilt.dagger)
+  kapt(libs.hilt.android.compiler)
+
+  // Preferences Data Store
+  implementation(libs.bundles.data.store)
+
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.ext.junit)
   androidTestImplementation(libs.espresso.core)
