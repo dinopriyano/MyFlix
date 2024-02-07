@@ -1,14 +1,11 @@
 package id.aej.myflix.design_system.presentation.components
 
-import android.graphics.drawable.Icon
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -27,7 +24,7 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
  * Created by dinopriyano on 27/11/23.
  */
 
-@OptIn(ExperimentalMaterial3Api::class) @Composable fun FlixTextField(
+@Composable fun FlixTextField(
   modifier: Modifier,
   input: InputWrapper<String>,
   keyboardOptions: KeyboardOptions,
@@ -66,6 +63,7 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
       visualTransformation = visualTransformation,
       colors = TextFieldDefaults.colors(
         focusedTextColor = Color.White,
+        unfocusedTextColor = Color.White,
         focusedPlaceholderColor = MaterialTheme.colorScheme.secondary,
         unfocusedPlaceholderColor = MaterialTheme.colorScheme.secondary,
         focusedContainerColor = Gray15,
@@ -75,5 +73,15 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
       ),
       onValueChange = onValueChange
     )
+
+    // error label
+    if (input.error != null && input.value.isNotEmpty()) {
+      Text(
+        modifier = Modifier.fillMaxWidth(),
+        text = input.error,
+        color = MaterialTheme.colorScheme.error,
+        style = MaterialTheme.typography.bodyMedium
+      )
+    }
   }
 }

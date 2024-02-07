@@ -46,6 +46,7 @@ android {
 dependencies {
   api(project(":feature-auth:api"))
   api(project(":design-system"))
+  api(project(":core"))
   implementation(project(":feature-home:impl"))
   implementation(libs.core.ktx)
   implementation(libs.appcompat)

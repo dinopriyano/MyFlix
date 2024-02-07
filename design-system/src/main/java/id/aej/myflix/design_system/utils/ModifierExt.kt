@@ -5,7 +5,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,25 +27,29 @@ import kotlin.math.absoluteValue
  * Created by dinopriyano on 30/11/23.
  */
 
-fun Modifier.animatedScale() = composed {
+fun Modifier.animatedScale(isEnabled: Boolean = true) = composed {
   var selected by remember {
     mutableStateOf(false)
   }
   val scale by animateFloatAsState(if (selected) 0.8f else 1f, label = "")
 
   this.let {
-    this.scale(scale)
-      .pointerInput(selected) {
-        awaitPointerEventScope {
-          selected = if (selected) {
-            waitForUpOrCancellation()
-            false
-          } else {
-            awaitFirstDown(false)
-            true
+    if (isEnabled) {
+      this.scale(scale)
+        .pointerInput(selected) {
+          awaitPointerEventScope {
+            selected = if (selected) {
+              waitForUpOrCancellation()
+              false
+            } else {
+              awaitFirstDown(false)
+              true
+            }
           }
         }
-      }
+    } else {
+      this
+    }
   }
 }
 

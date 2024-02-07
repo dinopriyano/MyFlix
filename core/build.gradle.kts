@@ -46,7 +46,7 @@ dependencies {
   kapt(libs.hilt.android.compiler)
 
   // Preferences Data Store
-  implementation(libs.bundles.data.store)
+  api(libs.bundles.data.store)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.ext.junit)

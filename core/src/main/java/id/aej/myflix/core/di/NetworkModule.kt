@@ -6,6 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import id.aej.myflix.core.data.source.local.AppDataStore
 import id.aej.myflix.core.data.source.remote.HttpClientFactory
+import id.aej.myflix.core.data.source.remote.service.AuthService
+import id.aej.myflix.core.data.source.remote.service.impl.AuthServiceImpl
 import io.ktor.client.HttpClient
 
 /**
@@ -16,12 +18,10 @@ import io.ktor.client.HttpClient
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
-  val hashMappp = hashMapOf<String, Any>(
-    "pageNumber" to 0,
-    "keyword" to "Sepatu"
-  )
-
   @Provides
   fun provideHttpClient(appDataStore: AppDataStore): HttpClient = HttpClientFactory(appDataStore).create()
+
+  @Provides
+  fun provideAuthService(httpClient: HttpClient): AuthService = AuthServiceImpl(httpClient)
 
 }
