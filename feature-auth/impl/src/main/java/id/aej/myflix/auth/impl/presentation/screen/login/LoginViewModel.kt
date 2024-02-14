@@ -8,6 +8,7 @@ import id.aej.myflix.core.data.source.local.AppDataStore
 import id.aej.myflix.core.data.source.remote.dto.request.LoginRequest
 import id.aej.myflix.core.data.source.remote.dto.response.AuthResponse
 import id.aej.myflix.core.data.source.remote.dto.response.WebResponse
+import id.aej.myflix.core.domain.model.Auth
 import id.aej.myflix.core.domain.model.Resource
 import id.aej.myflix.core.domain.use_case.AuthUseCase
 import id.aej.myflix.core.presentation.BaseViewModel
@@ -34,7 +35,7 @@ class LoginViewModel @Inject constructor(
   var passwordInput = mutableStateOf(InputWrapper(""))
     private set
 
-  private var _uiState = MutableSharedFlow<BasicUiState<WebResponse<AuthResponse>>>()
+  private var _uiState = MutableSharedFlow<BasicUiState<WebResponse<Auth>>>()
   val uiState = _uiState.asSharedFlow()
 
   fun storeToken(value: String) {

@@ -5,6 +5,8 @@ import id.aej.myflix.core.data.source.remote.dto.request.LoginRequest
 import id.aej.myflix.core.data.source.remote.dto.request.RegisterRequest
 import id.aej.myflix.core.data.source.remote.dto.response.AuthResponse
 import id.aej.myflix.core.data.source.remote.dto.response.WebResponse
+import id.aej.myflix.core.data.source.remote.dto.response.toDomain
+import id.aej.myflix.core.domain.model.Auth
 import id.aej.myflix.core.domain.model.Resource
 import id.aej.myflix.core.domain.repository.AuthRepository
 import id.aej.myflix.core.domain.use_case.AuthUseCase
@@ -19,15 +21,35 @@ class AuthInteractors constructor(
   private val coroutineContext: CoroutineContext,
   private val repository: AuthRepository
 ): AuthUseCase, SafeApiCall {
-  override suspend fun login(request: LoginRequest): Flow<Resource<WebResponse<AuthResponse>>> {
+  override suspend fun login(request: LoginRequest): Flow<Resource<WebResponse<Auth>>> {
     return execute(coroutineContext) {
-      safeApiCall { repository.login(request) }
+      safeApiCall {
+        repository.login(request).run {
+          WebResponse(
+            data?.toDomain(),
+            success,
+            message,
+            statusCode,
+            error
+          )
+        }
+      }
     }
   }
 
-  override suspend fun register(request: RegisterRequest): Flow<Resource<WebResponse<AuthResponse>>> {
+  override suspend fun register(request: RegisterRequest): Flow<Resource<WebResponse<Auth>>> {
     return execute(coroutineContext) {
-      safeApiCall { repository.register(request) }
+      safeApiCall {
+        repository.register(request).run {
+          WebResponse(
+            data?.toDomain(),
+            success,
+            message,
+            statusCode,
+            error
+          )
+        }
+      }
     }
   }
 }

@@ -55,6 +55,7 @@ dependencies {
   api(libs.navigation.compose)
   api(libs.icons.extended)
   api(libs.constraint.layout)
+  api(libs.lottie)
   implementation(libs.compose.animation)
 
   testImplementation(libs.junit)

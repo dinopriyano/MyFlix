@@ -18,6 +18,7 @@ compose-animation = "1.4.3"
 constraint-layout = "1.0.1"
 ktor="2.3.7"
 preferences-data-store="1.0.0"
+lottie="6.3.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -66,6 +67,9 @@ ktor-serialization-gson = { module = "io.ktor:ktor-serialization-gson", version.
 # Preferences Data Store
 data-store = { module = "androidx.datastore:datastore-preferences", version.ref = "preferences-data-store" }
 data-store-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "preferences-data-store" }
+
+# Lottie
+lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
