@@ -3,6 +3,7 @@ package id.aej.myflix.home.impl.presentation.screen.home
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -20,13 +21,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -42,7 +44,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import id.aej.myflix.core.data.source.DataDummy
+import id.aej.myflix.core.domain.model.MovieItem
+import id.aej.myflix.core.presentation.BasicUiState
 import id.aej.myflix.design_system.utils.carouselTransition
 import id.aej.myflix.home.impl.R
 
@@ -50,9 +55,17 @@ import id.aej.myflix.home.impl.R
  * Created by dinopriyano on 20/11/23.
  */
 
-@Composable fun HomeScreen() {
+@Composable fun HomeScreen(
+  viewModel: HomeViewModel
+) {
   var selectedCategoryIndex by rememberSaveable {
     mutableIntStateOf(0)
+  }
+
+  val uiState by viewModel.uiState.collectAsState(BasicUiState.Idle)
+
+  LaunchedEffect(Unit) {
+    viewModel.getMovies("12")
   }
 
   Column(modifier = Modifier.fillMaxSize()) {
@@ -72,9 +85,29 @@ import id.aej.myflix.home.impl.R
         selectedCategoryIndex = index
       }
     )
-    MovieSlider(modifier = Modifier
-      .fillMaxSize()
-      .padding(top = 24.dp, bottom = 88.dp))
+    when (val state = uiState) {
+      is BasicUiState.Loading -> {
+        Box(
+          modifier = Modifier.fillMaxSize(),
+          contentAlignment = Alignment.Center
+        ) {
+          CircularProgressIndicator(
+            modifier = Modifier
+              .size(36.dp),
+            color = MaterialTheme.colorScheme.onBackground
+          )
+        }
+      }
+      is BasicUiState.Success -> {
+        MovieSlider(
+          modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 24.dp, bottom = 88.dp),
+          movies = state.data.data.orEmpty()
+        )
+      }
+      else -> Unit
+    }
   }
 }
 
@@ -156,11 +189,12 @@ import id.aej.myflix.home.impl.R
 }
 
 @OptIn(ExperimentalFoundationApi::class) @Composable fun MovieSlider(
-  modifier: Modifier
+  modifier: Modifier,
+  movies: List<MovieItem>
 ) {
 
   val pagerState = rememberPagerState {
-    DataDummy.movies.size
+    movies.size
   }
 
   HorizontalPager(
@@ -169,18 +203,17 @@ import id.aej.myflix.home.impl.R
     contentPadding = PaddingValues(24.dp),
     modifier = modifier
   ) { index ->
-    DataDummy.movies.getOrNull(index)?.let { banner ->
+    movies.getOrNull(index)?.let { movie ->
       Card(
         modifier = Modifier.carouselTransition(index, pagerState),
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(10.dp)
       ) {
-        Image(
+        AsyncImage(
           modifier = Modifier.fillMaxSize(),
           contentScale = ContentScale.Crop,
-          painter = painterResource(id = banner),
-          contentDescription = null
-        )
+          model = movie.posterUrl,
+          contentDescription = null)
       }
     }
   }

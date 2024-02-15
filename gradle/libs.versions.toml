@@ -19,6 +19,7 @@ constraint-layout = "1.0.1"
 ktor="2.3.7"
 preferences-data-store="1.0.0"
 lottie="6.3.0"
+coil="2.5.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -70,6 +71,9 @@ data-store-core = { module = "androidx.datastore:datastore-preferences-core", ve
 
 # Lottie
 lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
+
+# Coil
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }

@@ -3,15 +3,14 @@ package id.aej.myflix.auth.impl.presentation.screen.login
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import id.aej.myflix.auth.impl.presentation.BasicUiState
 import id.aej.myflix.core.data.source.local.AppDataStore
 import id.aej.myflix.core.data.source.remote.dto.request.LoginRequest
-import id.aej.myflix.core.data.source.remote.dto.response.AuthResponse
 import id.aej.myflix.core.data.source.remote.dto.response.WebResponse
 import id.aej.myflix.core.domain.model.Auth
 import id.aej.myflix.core.domain.model.Resource
 import id.aej.myflix.core.domain.use_case.AuthUseCase
 import id.aej.myflix.core.presentation.BaseViewModel
+import id.aej.myflix.core.presentation.BasicUiState
 import id.aej.myflix.core.utils.InputValidator
 import id.aej.myflix.design_system.domain.model.InputWrapper
 import kotlinx.coroutines.flow.MutableSharedFlow

@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import id.aej.myflix.core.data.source.local.AppDataStore
+import javax.inject.Singleton
 
 /**
  * Created by dinopriyano on 11/01/24.
@@ -17,6 +18,7 @@ import id.aej.myflix.core.data.source.local.AppDataStore
 class LocalModule {
 
   @Provides
+  @Singleton
   fun provideAppDataStore(@ApplicationContext context: Context): AppDataStore {
     return AppDataStore(context)
   }

@@ -7,7 +7,9 @@ import dagger.hilt.components.SingletonComponent
 import id.aej.myflix.core.data.source.local.AppDataStore
 import id.aej.myflix.core.data.source.remote.HttpClientFactory
 import id.aej.myflix.core.data.source.remote.service.AuthService
+import id.aej.myflix.core.data.source.remote.service.MovieService
 import id.aej.myflix.core.data.source.remote.service.impl.AuthServiceImpl
+import id.aej.myflix.core.data.source.remote.service.impl.MovieServiceImpl
 import io.ktor.client.HttpClient
 
 /**
@@ -23,5 +25,8 @@ class NetworkModule {
 
   @Provides
   fun provideAuthService(httpClient: HttpClient): AuthService = AuthServiceImpl(httpClient)
+
+  @Provides
+  fun provideMovieService(httpClient: HttpClient): MovieService = MovieServiceImpl(httpClient)
 
 }

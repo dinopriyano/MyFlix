@@ -29,13 +29,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -45,10 +43,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import id.aej.myflix.auth.impl.R
-import id.aej.myflix.auth.impl.presentation.BasicUiState
+import id.aej.myflix.core.presentation.BasicUiState
 import id.aej.myflix.design_system.domain.model.PartialClickableTextItems
 import id.aej.myflix.design_system.domain.model.PartialClickableTextType
 import id.aej.myflix.design_system.presentation.components.FlixButton
@@ -77,7 +74,6 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
     mutableStateOf(false)
   }
   val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.error))
-  val progress by animateLottieCompositionAsState(composition)
   var errorMessage by remember {
     mutableStateOf("")
   }
@@ -87,6 +83,7 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
   LaunchedEffect(uiState) {
     when(val result = uiState) {
       is BasicUiState.Success -> {
+        viewModel.storeToken(result.data.data?.token.orEmpty())
         onLoginSuccess()
       }
       is BasicUiState.Error -> {
@@ -249,8 +246,7 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
           LottieAnimation(
             modifier = Modifier.height(230.dp),
             contentScale = ContentScale.FillHeight,
-            composition = composition,
-            progress = { progress },
+            composition = composition
           )
           Text(
             text = errorMessage,

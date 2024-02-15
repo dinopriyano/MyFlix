@@ -1,4 +1,4 @@
-package id.aej.myflix.auth.impl.presentation
+package id.aej.myflix.core.presentation
 
 /**
  * Created by dinopriyano on 07/02/24.

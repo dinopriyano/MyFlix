@@ -41,6 +41,11 @@ class HttpClientFactory (
     }
     install(Auth) {
       bearer {
+        // use this for exclude token on specific url
+//        sendWithoutRequest { request ->
+//          request.url.encodedPath.startsWith("/login")
+//              || request.url.encodedPath.startsWith("/register")
+//        }
         loadTokens {
           appDataStore.token.firstOrNull()?.let {
             BearerTokens(it, "")
