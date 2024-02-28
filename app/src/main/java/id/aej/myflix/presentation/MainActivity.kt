@@ -3,6 +3,7 @@ package id.aej.myflix.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,11 +13,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import id.aej.myflix.auth.api.AuthFeature
@@ -43,22 +47,34 @@ class MainActivity : ComponentActivity() {
   @Inject
   lateinit var profileFeature: ProfileFeature
 
+  private val mainViewModel by viewModels<MainViewModel>()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    installSplashScreen().apply {
+      setKeepOnScreenCondition {
+        mainViewModel.isLoading.value
+      }
+    }
     setContent {
-      MyFlixTheme {
-        MyFlixApp(
-          authFeature,
-          homeFeature,
-          favoriteFeature,
-          profileFeature
-        )
+      val startDestination by mainViewModel.startDestination.collectAsState()
+      if (startDestination.isNotEmpty()) {
+        MyFlixTheme {
+          MyFlixApp(
+            startDestination,
+            authFeature,
+            homeFeature,
+            favoriteFeature,
+            profileFeature
+          )
+        }
       }
     }
   }
 }
 
 @Composable fun MyFlixApp(
+  startDestination: String,
   authFeature: AuthFeature,
   homeFeature: HomeFeature,
   favoriteFeature: FavoriteFeature,
@@ -71,7 +87,7 @@ class MainActivity : ComponentActivity() {
     contentAlignment = Alignment.BottomCenter,
   ) {
     AppNavigation(
-      startDestination = authFeature.authRoute,
+      startDestination = startDestination,
       navController = navController,
       authFeature = authFeature,
       homeFeature = homeFeature,

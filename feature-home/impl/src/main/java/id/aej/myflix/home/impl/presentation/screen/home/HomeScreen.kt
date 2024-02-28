@@ -64,7 +64,7 @@ import id.aej.myflix.home.impl.R
 
   val uiState by viewModel.uiState.collectAsState(BasicUiState.Idle)
 
-  LaunchedEffect(Unit) {
+  LaunchedEffect(selectedCategoryIndex) {
     viewModel.getMovies("12")
   }
 
@@ -102,7 +102,7 @@ import id.aej.myflix.home.impl.R
         MovieSlider(
           modifier = Modifier
             .fillMaxSize()
-            .padding(top = 24.dp, bottom = 88.dp),
+            .padding(bottom = 88.dp),
           movies = state.data.data.orEmpty()
         )
       }
@@ -200,8 +200,8 @@ import id.aej.myflix.home.impl.R
   HorizontalPager(
     state = pagerState,
     pageSpacing = 8.dp,
+    modifier = modifier,
     contentPadding = PaddingValues(24.dp),
-    modifier = modifier
   ) { index ->
     movies.getOrNull(index)?.let { movie ->
       Card(

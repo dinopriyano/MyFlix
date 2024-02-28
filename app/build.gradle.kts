@@ -68,6 +68,9 @@ dependencies {
   implementation(libs.bundles.hilt.dagger)
   kapt(libs.hilt.android.compiler)
 
+  // Splash API
+  implementation(libs.splash.api)
+
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.ext.junit)
   androidTestImplementation(libs.espresso.core)
