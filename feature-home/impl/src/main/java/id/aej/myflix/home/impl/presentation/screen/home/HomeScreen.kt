@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,7 +57,8 @@ import id.aej.myflix.home.impl.R
  */
 
 @Composable fun HomeScreen(
-  viewModel: HomeViewModel
+  viewModel: HomeViewModel,
+  onMovieClick: (String) -> Unit
 ) {
   var selectedCategoryIndex by rememberSaveable {
     mutableIntStateOf(0)
@@ -104,7 +106,11 @@ import id.aej.myflix.home.impl.R
             .fillMaxSize()
             .padding(bottom = 88.dp),
           movies = state.data.data.orEmpty()
-        )
+        ) { movie ->
+          movie.id?.let {
+            onMovieClick(it.toString())
+          }
+        }
       }
       else -> Unit
     }
@@ -188,9 +194,10 @@ import id.aej.myflix.home.impl.R
   }
 }
 
-@OptIn(ExperimentalFoundationApi::class) @Composable fun MovieSlider(
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class) @Composable fun MovieSlider(
   modifier: Modifier,
-  movies: List<MovieItem>
+  movies: List<MovieItem>,
+  onCardClick: (MovieItem) -> Unit
 ) {
 
   val pagerState = rememberPagerState {
@@ -207,7 +214,10 @@ import id.aej.myflix.home.impl.R
       Card(
         modifier = Modifier.carouselTransition(index, pagerState),
         shape = RoundedCornerShape(20.dp),
-        elevation = CardDefaults.cardElevation(10.dp)
+        elevation = CardDefaults.cardElevation(10.dp),
+        onClick = {
+          onCardClick(movie)
+        }
       ) {
         AsyncImage(
           modifier = Modifier.fillMaxSize(),

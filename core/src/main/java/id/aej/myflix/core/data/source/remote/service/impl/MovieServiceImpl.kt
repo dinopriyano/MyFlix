@@ -8,6 +8,8 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 
 /**
@@ -20,6 +22,29 @@ class MovieServiceImpl constructor(
     return httpClient.get {
       url(HttpRoutes.MOVIES)
       parameter("genreId", genre)
+    }.body()
+  }
+
+  override suspend fun getMovieDetail(movieId: String): WebResponse<MovieItemResponse> {
+    return httpClient.get {
+      url(HttpRoutes.MOVIE_DETAIL.replace("{movieId}", movieId))
+    }.body()
+  }
+
+  override suspend fun storeWatchList(movieId: String): WebResponse<MovieItemResponse> {
+    return httpClient.post {
+      url(HttpRoutes.WATCH_LIST)
+      setBody(
+        mapOf(
+          "movieId" to movieId
+        )
+      )
+    }.body()
+  }
+
+  override suspend fun getWatchList(): WebResponse<List<MovieItemResponse>> {
+    return httpClient.get {
+      url(HttpRoutes.WATCH_LIST)
     }.body()
   }
 }

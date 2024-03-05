@@ -33,4 +33,52 @@ class MovieInteractors constructor(
       }
     }
   }
+
+  override suspend fun getMovieDetail(movieId: String): Flow<Resource<WebResponse<MovieItem>>> {
+    return execute(coroutineContext) {
+      safeApiCall {
+        movieRepository.getMovieDetail(movieId).run {
+          WebResponse(
+            data?.toDomain(),
+            success,
+            message,
+            statusCode,
+            error
+          )
+        }
+      }
+    }
+  }
+
+  override suspend fun storeWatchList(movieId: String): Flow<Resource<WebResponse<MovieItem>>> {
+    return execute(coroutineContext) {
+      safeApiCall {
+        movieRepository.storeWatchList(movieId).run {
+          WebResponse(
+            data?.toDomain(),
+            success,
+            message,
+            statusCode,
+            error
+          )
+        }
+      }
+    }
+  }
+
+  override suspend fun getWatchList(): Flow<Resource<WebResponse<List<MovieItem>>>> {
+    return execute(coroutineContext) {
+      safeApiCall {
+        movieRepository.getWatchList().run {
+          WebResponse(
+            data?.map { it.toDomain() },
+            success,
+            message,
+            statusCode,
+            error
+          )
+        }
+      }
+    }
+  }
 }

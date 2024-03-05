@@ -8,7 +8,13 @@ data class MovieItemResponse(
 	val releaseDate: String? = null,
 	val id: Int? = null,
 	val title: String? = null,
-	val filmRate: String? = null
+	val filmRate: String? = null,
+	val director: String? = null,
+	val trailerUrl: String? = null,
+	val videoUrl: String? = null,
+	val category: List<String>? = null,
+	val cast: List<String>? = null,
+	val isUserWatchList: Boolean? = null
 )
 
 fun MovieItemResponse.toDomain() = MovieItem(
@@ -17,6 +23,12 @@ fun MovieItemResponse.toDomain() = MovieItem(
 	this.releaseDate,
 	this.id,
 	this.title,
-	this.filmRate
+	this.filmRate,
+	this.director,
+	this.trailerUrl,
+	this.videoUrl,
+	this.category,
+	this.cast,
+	this.isUserWatchList
 )
 

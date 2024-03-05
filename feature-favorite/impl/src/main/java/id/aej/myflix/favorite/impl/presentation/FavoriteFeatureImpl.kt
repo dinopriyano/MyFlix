@@ -1,12 +1,13 @@
 package id.aej.myflix.favorite.impl.presentation
 
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import id.aej.myflix.design_system.utils.composable
 import id.aej.myflix.design_system.utils.nonAnimationComposable
 import id.aej.myflix.favorite.api.FavoriteFeature
 import id.aej.myflix.favorite.impl.presentation.screen.favorite.FavoriteScreen
+import id.aej.myflix.favorite.impl.presentation.screen.favorite.FavoriteViewModel
 
 /**
  * Created by dinopriyano on 07/12/23.
@@ -21,7 +22,10 @@ class FavoriteFeatureImpl: FavoriteFeature {
     navGraphBuilder.nonAnimationComposable(
       route = FavoriteRoute.Favorite.route
     ) {
-      FavoriteScreen()
+      val viewModel: FavoriteViewModel = hiltViewModel()
+      FavoriteScreen(
+        viewModel
+      )
     }
   }
 }

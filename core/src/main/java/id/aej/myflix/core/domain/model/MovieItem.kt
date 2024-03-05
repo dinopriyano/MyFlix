@@ -6,6 +6,12 @@ data class MovieItem(
 	val releaseDate: String? = null,
 	val id: Int? = null,
 	val title: String? = null,
-	val filmRate: String? = null
+	val filmRate: String? = null,
+	val director: String? = null,
+	val trailerUrl: String? = null,
+	val videoUrl: String? = null,
+	val category: List<String>? = null,
+	val cast: List<String>? = null,
+	val isUserWatchList: Boolean? = null
 )
 
