@@ -4,4 +4,6 @@
     <string name="greeting_message">Hope you have a great day!</string>
     <string name="add_to_watch_list_txt">Add to Watch List</string>
     <string name="remove_from_watch_list_txt">Remove from Watch List</string>
+    <string name="cast_txt">Cast</string>
+    <string name="overview_txt">Overview</string>
 </resources>

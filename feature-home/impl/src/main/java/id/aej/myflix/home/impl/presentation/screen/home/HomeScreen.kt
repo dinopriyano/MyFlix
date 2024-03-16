@@ -160,7 +160,7 @@ import id.aej.myflix.home.impl.R
         .size(56.dp)
         .clip(CircleShape),
       contentScale = ContentScale.Crop,
-      painter = painterResource(id = R.drawable.person),
+      painter = painterResource(id = R.drawable.person_five),
       contentDescription = null
     )
   }

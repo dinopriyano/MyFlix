@@ -21,6 +21,7 @@ preferences-data-store="1.0.0"
 lottie="6.3.0"
 coil="2.5.0"
 splash-api="1.0.0"
+haze="0.6.2"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -78,6 +79,9 @@ coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 # Splash API
 splash-api = { module = "androidx.core:core-splashscreen", version.ref = "splash-api" }
+
+# Blur
+haze = { module = "dev.chrisbanes.haze:haze-materials", version.ref = "haze" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }

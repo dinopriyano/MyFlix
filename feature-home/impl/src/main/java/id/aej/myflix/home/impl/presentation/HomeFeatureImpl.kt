@@ -42,7 +42,13 @@ class HomeFeatureImpl: HomeFeature {
     ) { navBackStackEntry ->
       val viewModel: MovieDetailViewModel = hiltViewModel()
       val movieId = navBackStackEntry.arguments?.getString("movieId").orEmpty()
-      MovieDetailScreen(viewModel = viewModel, movieId = movieId)
+      MovieDetailScreen(
+        viewModel = viewModel,
+        movieId = movieId,
+        onBackClick = {
+          navController.popBackStack()
+        }
+      )
     }
   }
 }

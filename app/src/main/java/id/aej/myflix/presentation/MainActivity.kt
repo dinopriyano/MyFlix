@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -83,7 +85,9 @@ class MainActivity : ComponentActivity() {
   val navController = rememberNavController()
 
   Box(
-    Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
+    Modifier
+      .fillMaxSize()
+      .background(MaterialTheme.colorScheme.background),
     contentAlignment = Alignment.BottomCenter,
   ) {
     AppNavigation(
@@ -96,7 +100,10 @@ class MainActivity : ComponentActivity() {
     )
 
     AppBottomBar(
-      modifier = Modifier.padding(bottom = 24.dp).clip(RoundedCornerShape(percent = 50)).background(Color.White),
+      modifier = Modifier
+        .padding(bottom = 24.dp)
+        .clip(RoundedCornerShape(percent = 50))
+        .background(Color.White),
       navController = navController,
       homeFeature = homeFeature,
       favoriteFeature = favoriteFeature,

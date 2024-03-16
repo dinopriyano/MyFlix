@@ -57,6 +57,7 @@ dependencies {
   api(libs.constraint.layout)
   api(libs.lottie)
   api(libs.coil)
+  api(libs.haze)
   implementation(libs.compose.animation)
 
   testImplementation(libs.junit)
